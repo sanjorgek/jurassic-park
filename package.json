@@ -1,0 +1,25 @@
+{
+  "name": "jurassic-park",
+  "version": "1.0.0",
+  "description": "Jurassic Park System",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanjorgek/jurassic-park.git"
+  },
+  "keywords": [
+    "jurassic",
+    "park",
+    "system",
+    "web",
+    "dinosaur"
+  ],
+  "author": "sanjorgek",
+  "bugs": {
+    "url": "https://github.com/sanjorgek/jurassic-park/issues"
+  },
+  "homepage": "https://github.com/sanjorgek/jurassic-park#readme"
+}
