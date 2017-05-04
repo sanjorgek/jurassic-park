@@ -1,10 +1,9 @@
 {
   "name": "jurassic-park",
-  "version": "1.0.0",
-  "description": "Jurassic Park System",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "mocha"
+    "start": "DEBUG=jurassic-park:* node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -21,5 +20,15 @@
   "bugs": {
     "url": "https://github.com/sanjorgek/jurassic-park/issues"
   },
-  "homepage": "https://github.com/sanjorgek/jurassic-park#readme"
+  "homepage": "https://github.com/sanjorgek/jurassic-park#readme",
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.6",
+    "ejs": "~2.5.6",
+    "express": "~4.15.2",
+    "morgan": "~1.8.1",
+    "mysql": "^2.13.0",
+    "serve-favicon": "~2.4.2"
+  }
 }
