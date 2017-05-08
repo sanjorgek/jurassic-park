@@ -1,4 +1,5 @@
-  
+use jurassicParkDB;
+
 DELIMITER $$
 CREATE TRIGGER trig_rfc_check BEFORE INSERT ON employee
 FOR EACH ROW 
