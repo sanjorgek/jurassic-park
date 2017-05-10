@@ -14,4 +14,8 @@ router.get('/new_reservation', function(req, res, next) {
   res.render('new_reservation', {title: 'Jurassic Park', });
 });
 
+router.get('/new_school', function(req, res, next) {
+  res.render('new_school', {title: 'Jurassic Park', });
+});
+
 module.exports = router;

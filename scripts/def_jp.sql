@@ -4,6 +4,10 @@
 
 CREATE DATABASE IF NOT EXISTS jurassicParkDB;
 
+CREATE USER 'jpAdmin'@'localhost' IDENTIFIED BY 'apophis89hep';
+
+GRANT ALL ON jurassicParkDB.* TO 'jpAdmin'@'localhost';
+
 create table `jurassicParkDB`.`country` (
   id                        bigint auto_increment not null,
   name                      varchar(255) not null,
@@ -35,7 +39,6 @@ create table `jurassicParkDB`.`city` (
 
 create table `jurassicParkDB`.`address` (
   id                        bigint auto_increment not null,
-  number                    tinyint UNSIGNED,
   pc                        mediumint UNSIGNED,
   street                    varchar(255),
   district                  varchar(255),
@@ -50,7 +53,7 @@ create table `jurassicParkDB`.`school` (
   id						bigint auto_increment not null,
   code						varchar(255) not null,
   name                      varchar(255) not null,
-  address_id               	bigint,
+  address_id               	bigint not null,
   created_at                datetime DEFAULT CURRENT_TIMESTAMP,
   updated_at                datetime ON UPDATE CURRENT_TIMESTAMP,
   deleted_at                datetime,
@@ -319,141 +322,155 @@ create table `jurassicParkDB`.`dinosaur_safety_requirement`(
   safety_requirement		varchar(255) not null
 ) ENGINE=INNODB;
 
-alter table `jurassicParkDB`.`state` add 
-  constraint fk_state_country foreign key (country_id) references `jurassicParkDB`.`country` (id)
-  on delete restrict on update restrict;
-create index ix_state_country on `jurassicParkDB`.`state` (country_id);
-alter table `jurassicParkDB`.`city` add 
-  constraint fk_city_state foreign key (state_id) references `jurassicParkDB`.`state` (id)
-  on delete restrict on update restrict;
-create index ix_city_state on `jurassicParkDB`.`city` (state_id);
-alter table `jurassicParkDB`.`address` add 
-  constraint fk_address_city foreign key (city_id) references `jurassicParkDB`.`city` (id)
-  on delete restrict on update restrict;
-create index ix_address_city on `jurassicParkDB`.`address` (city_id);
-alter table `jurassicParkDB`.`school` add 
-  constraint fk_school_address foreign key (address_id) references `jurassicParkDB`.`address` (id)
-  on delete restrict on update restrict;
-create index ix_school_address on `jurassicParkDB`.`school` (address_id);
+#
+# Unique
+#
+alter table `jurassicParkDB`.`country` add
+  constraint uq_country_1 unique (name);
+alter table `jurassicParkDB`.`state` add
+  constraint uq_state_1 unique (name, country_id);
+alter table `jurassicParkDB`.`city` add
+  constraint uq_city_1 unique (name, state_id);
+alter table `jurassicParkDB`.`address` add
+  constraint uq_address_1 unique (pc, street, district, city_id);
 alter table `jurassicParkDB`.`school` add
-  constraint uq_school unique (code);
-create index ix_school_code on `jurassicParkDB`.`school` (code);
-alter table `jurassicParkDB`.`school_email` add 
-  constraint fk_school_email_school_1 foreign key (school_id) references `jurassicParkDB`.`school` (id)
-  on delete restrict on update restrict;
-alter table `jurassicParkDB`.`school_email` add 
-  constraint fk_school_email_school_2 foreign key (school_code) references `jurassicParkDB`.`school` (code)
-  on delete restrict on update restrict;
-alter table `jurassicParkDB`.`school_telephone` add 
-  constraint fk_school_telephone_school_1 foreign key (school_id) references `jurassicParkDB`.`school` (id)
-  on delete restrict on update restrict;
-alter table `jurassicParkDB`.`school_telephone` add 
-  constraint fk_school_telephone_school_2 foreign key (school_code) references `jurassicParkDB`.`school` (code)
-  on delete restrict on update restrict;
-alter table `jurassicParkDB`.`reservation` add 
-  constraint fk_reservation_school_1 foreign key (school_id) references `jurassicParkDB`.`school` (id)
-  on delete restrict on update restrict;
-alter table `jurassicParkDB`.`reservation` add 
-  constraint fk_reservation_school_2 foreign key (school_code) references `jurassicParkDB`.`school` (code)
-  on delete restrict on update restrict;
+  constraint uq_school_1 unique (code);
+alter table `jurassicParkDB`.`school` add
+  constraint uq_school_2 unique (name);
+alter table `jurassicParkDB`.`school_email` add
+  constraint uq_school_email_1 unique (school_id,school_code,email);
+alter table `jurassicParkDB`.`school_telephone` add
+  constraint uq_school_telephone_2 unique (school_id,school_code,telephone);
 alter table `jurassicParkDB`.`visit_type` add
   constraint uq_visit_type unique (code);
-create index ix_visit_type on `jurassicParkDB`.`visit_type` (code);
-alter table `jurassicParkDB`.`product_visit` add 
-  constraint fk_product_visit_visit_type_1 foreign key (visit_type_id) references `jurassicParkDB`.`visit_type` (id)
-  on delete restrict on update restrict;
-alter table `jurassicParkDB`.`product_visit` add 
-  constraint fk_product_visit_visit_type_2 foreign key (visit_type_code) references `jurassicParkDB`.`visit_type` (code)
-  on delete restrict on update restrict;
-alter table `jurassicParkDB`.`reserve_zone` add 
-  constraint fk_reserve_zone_visit_type_1 foreign key (visit_type_id) references `jurassicParkDB`.`visit_type` (id)
-  on delete restrict on update restrict;
-alter table `jurassicParkDB`.`reserve_zone` add 
-  constraint fk_reserve_zone_visit_type_2 foreign key (visit_type_code) references `jurassicParkDB`.`visit_type` (code)
-  on delete restrict on update restrict;
-alter table `jurassicParkDB`.`reserve_zone` add 
-  constraint fk_reserve_zone_reservation_1 foreign key (reservation_id) references `jurassicParkDB`.`reservation` (id)
-  on delete restrict on update restrict;
-alter table `jurassicParkDB`.`reserve_zone_teacher` add 
-  constraint fk_reserve_zone_teacher_1 foreign key (reserve_zone_id) references `jurassicParkDB`.`reserve_zone` (id)
-  on delete restrict on update restrict;
-alter table `jurassicParkDB`.`student` add 
-  constraint fk_student_1 foreign key (reserve_zone_id) references `jurassicParkDB`.`reserve_zone` (id)
-  on delete restrict on update restrict;
 alter table `jurassicParkDB`.`student` add
   constraint uq_student unique (reserve_zone_id, name);
 alter table `jurassicParkDB`.`ticket` add
   constraint uq_ticket unique (code);
-create index ix_ticket on `jurassicParkDB`.`ticket` (code);
-alter table `jurassicParkDB`.`ticket` add 
+
+#
+# Foreign
+#
+alter table `jurassicParkDB`.`state` add
+  constraint fk_state_country foreign key (country_id) references `jurassicParkDB`.`country` (id)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`city` add
+  constraint fk_city_state foreign key (state_id) references `jurassicParkDB`.`state` (id)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`address` add
+  constraint fk_address_city foreign key (city_id) references `jurassicParkDB`.`city` (id)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`school` add
+  constraint fk_school_address foreign key (address_id) references `jurassicParkDB`.`address` (id)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`school_email` add
+  constraint fk_school_email_school_1 foreign key (school_id) references `jurassicParkDB`.`school` (id)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`school_email` add
+  constraint fk_school_email_school_2 foreign key (school_code) references `jurassicParkDB`.`school` (code)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`school_telephone` add
+  constraint fk_school_telephone_school_1 foreign key (school_id) references `jurassicParkDB`.`school` (id)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`school_telephone` add
+  constraint fk_school_telephone_school_2 foreign key (school_code) references `jurassicParkDB`.`school` (code)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`reservation` add
+  constraint fk_reservation_school_1 foreign key (school_id) references `jurassicParkDB`.`school` (id)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`reservation` add
+  constraint fk_reservation_school_2 foreign key (school_code) references `jurassicParkDB`.`school` (code)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`product_visit` add
+  constraint fk_product_visit_visit_type_1 foreign key (visit_type_id) references `jurassicParkDB`.`visit_type` (id)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`product_visit` add
+  constraint fk_product_visit_visit_type_2 foreign key (visit_type_code) references `jurassicParkDB`.`visit_type` (code)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`reserve_zone` add
+  constraint fk_reserve_zone_visit_type_1 foreign key (visit_type_id) references `jurassicParkDB`.`visit_type` (id)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`reserve_zone` add
+  constraint fk_reserve_zone_visit_type_2 foreign key (visit_type_code) references `jurassicParkDB`.`visit_type` (code)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`reserve_zone` add
+  constraint fk_reserve_zone_reservation_1 foreign key (reservation_id) references `jurassicParkDB`.`reservation` (id)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`reserve_zone_teacher` add
+  constraint fk_reserve_zone_teacher_1 foreign key (reserve_zone_id) references `jurassicParkDB`.`reserve_zone` (id)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`student` add
+  constraint fk_student_1 foreign key (reserve_zone_id) references `jurassicParkDB`.`reserve_zone` (id)
+  on delete restrict on update restrict;
+alter table `jurassicParkDB`.`ticket` add
   constraint fk_ticket_1 foreign key (product_visit_id) references `jurassicParkDB`.`product_visit` (id)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`ticket` add 
+alter table `jurassicParkDB`.`ticket` add
   constraint fk_ticket_2 foreign key (student_id) references `jurassicParkDB`.`student` (id)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`employee` add 
+alter table `jurassicParkDB`.`employee` add
   constraint fk_employee_1 foreign key (address_id) references `jurassicParkDB`.`address` (id)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`police` add 
+alter table `jurassicParkDB`.`police` add
   constraint fk_police_1 foreign key (rfc) references `jurassicParkDB`.`employee` (rfc)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`scientist` add 
+alter table `jurassicParkDB`.`scientist` add
   constraint fk_scientist_1 foreign key (rfc) references `jurassicParkDB`.`employee` (rfc)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`veterinary` add 
+alter table `jurassicParkDB`.`veterinary` add
   constraint fk_veterinary_1 foreign key (rfc) references `jurassicParkDB`.`employee` (rfc)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`quatermaster` add 
+alter table `jurassicParkDB`.`quatermaster` add
   constraint fk_quatermaster_1 foreign key (rfc) references `jurassicParkDB`.`employee` (rfc)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`driver` add 
+alter table `jurassicParkDB`.`driver` add
   constraint fk_driver_1 foreign key (rfc) references `jurassicParkDB`.`employee` (rfc)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`zone` add 
+alter table `jurassicParkDB`.`zone` add
   constraint fk_zone_1 foreign key (scientist_rfc) references `jurassicParkDB`.`scientist` (rfc)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`zone` add 
+alter table `jurassicParkDB`.`zone` add
   constraint fk_zone_2 foreign key (police_rfc) references `jurassicParkDB`.`police` (rfc)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`zone` add 
+alter table `jurassicParkDB`.`zone` add
   constraint fk_zone_3 foreign key (veterinary_rfc) references `jurassicParkDB`.`veterinary` (rfc)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`zone` add 
+alter table `jurassicParkDB`.`zone` add
   constraint fk_zone_4 foreign key (quatermaster_rfc) references `jurassicParkDB`.`quatermaster` (rfc)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`visit` add 
+alter table `jurassicParkDB`.`visit` add
   constraint fk_visit_1 foreign key (reserve_zone_id) references `jurassicParkDB`.`reserve_zone` (id)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`visit` add 
+alter table `jurassicParkDB`.`visit` add
   constraint fk_visit_2 foreign key (zone_code) references `jurassicParkDB`.`zone` (code)
   on delete restrict on update restrict;
 alter table `jurassicParkDB`.`vehicle_model` add
   constraint uq_vehicle_model unique (manufacturer, model);
-alter table `jurassicParkDB`.`vehicle` add 
+alter table `jurassicParkDB`.`vehicle` add
   constraint fk_vehicle_1 foreign key (vehicle_model_id) references `jurassicParkDB`.`vehicle_model` (id)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`driver` add 
+alter table `jurassicParkDB`.`driver` add
   constraint fk_driver_2 foreign key (vehicle_id) references `jurassicParkDB`.`vehicle` (id)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`zone_vehicle` add 
+alter table `jurassicParkDB`.`zone_vehicle` add
   constraint fk_zone_vehicle_1 foreign key (vehicle_id) references `jurassicParkDB`.`vehicle` (id)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`zone_vehicle` add 
+alter table `jurassicParkDB`.`zone_vehicle` add
   constraint fk_zone_vehicle_2 foreign key (zone_code) references `jurassicParkDB`.`zone` (code)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`tax_phylum` add 
+alter table `jurassicParkDB`.`tax_phylum` add
   constraint fk_tax_phylum_1 foreign key (tax_kingdom_id) references `jurassicParkDB`.`tax_kingdom` (id)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`tax_class` add 
+alter table `jurassicParkDB`.`tax_class` add
   constraint fk_tax_class_1 foreign key (tax_phylum_id) references `jurassicParkDB`.`tax_phylum` (id)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`dinosaur` add 
+alter table `jurassicParkDB`.`dinosaur` add
   constraint fk_dinosaur_1 foreign key (tax_class_id) references `jurassicParkDB`.`tax_class` (id)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`dinosaur` add 
+alter table `jurassicParkDB`.`dinosaur` add
   constraint fk_dinosaur_2 foreign key (zone_code) references `jurassicParkDB`.`zone` (code)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`dinosaur` add 
+alter table `jurassicParkDB`.`dinosaur` add
   constraint fk_dinosaur_3 foreign key (distribution_id) references `jurassicParkDB`.`distribution` (id)
   on delete restrict on update restrict;
 alter table `jurassicParkDB`.`prefer` add 
@@ -462,7 +479,17 @@ alter table `jurassicParkDB`.`prefer` add
 alter table `jurassicParkDB`.`prefer` add 
   constraint fk_prefer_2 foreign key (vegetation_type_id) references `jurassicParkDB`.`vegetation_type` (id)
   on delete restrict on update restrict;  
-alter table `jurassicParkDB`.`dinosaur_safety_requirement` add 
+alter table `jurassicParkDB`.`dinosaur_safety_requirement` add
   constraint fk_dinosaur_safety_requirement_1 foreign key (dinosaur_id) references `jurassicParkDB`.`dinosaur` (id)
   on delete restrict on update restrict;
-  
+
+#
+# Index
+#
+create index ix_state_country on `jurassicParkDB`.`state` (country_id);
+create index ix_city_state on `jurassicParkDB`.`city` (state_id);
+create index ix_address_city on `jurassicParkDB`.`address` (city_id);
+create index ix_school_address on `jurassicParkDB`.`school` (address_id);
+create index ix_school_code on `jurassicParkDB`.`school` (code);
+create index ix_visit_type on `jurassicParkDB`.`visit_type` (code);
+create index ix_ticket on `jurassicParkDB`.`ticket` (code);

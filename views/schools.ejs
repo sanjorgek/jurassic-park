@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      table, th, td {
+          border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Escuelas: </p>
+    <p>
+      <table style="width:100%">
+        <tr>
+          <th>#</th>
+          <th>Codigo</th>
+          <th>Nombre</th>
+          <th>Direccion</th>
+          <th>Telefonos</th>
+          <th>Mails</th>
+          <th>Editar</th>
+          <th>Reservar</th>
+        </tr>
+          <% for(var i=0; i<schools.length; i++){ %>
+            <tr>
+              <td><%= i %></td>
+              <td><%= schools[i].school_code %></td>
+              <td><%= schools[i].school_name %></td>
+              <td><%= schools[i].school_name %></td>
+              <td><%= schools[i].telephones %></td>
+              <td><%= schools[i].emails %></td>
+              <td></td>
+              <td></td>
+            </tr>
+          <% } %>
+      </table>
+    </p>
+  </body>
+</html>

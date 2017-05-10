@@ -1,7 +1,7 @@
 use jurassicParkDB;
 
 DELIMITER $$
-CREATE TRIGGER trig_rfc_check BEFORE INSERT ON employee
+CREATE TRIGGER trig_rfc_insert BEFORE INSERT ON employee
 FOR EACH ROW 
 BEGIN 
 IF (NEW.rfc REGEXP '^[A-Z&]{3,4}[0-9]{6}([A-Z&]{2}|[0-9]{2}|[A-Z&][0-9]|[0-9][A-Z&])([A]|[0-9])' ) = 0 THEN 
@@ -10,6 +10,21 @@ IF (NEW.rfc REGEXP '^[A-Z&]{3,4}[0-9]{6}([A-Z&]{2}|[0-9]{2}|[A-Z&][0-9]|[0-9][A-
 END IF; 
 END$$
 DELIMITER ;
+
+
+DELIMITER ///
+CREATE TRIGGER trig_rfc_update AFTER UPDATE ON employee
+    FOR EACH ROW
+    BEGIN
+        IF NEW.rfc not regexp '^[A-Z&]{3,4}[0-9]{6}([A-Z&]{2}|[0-9]{2}|[A-Z&][0-9]|[0-9][A-Z&])([A]|[0-9])'  THEN  
+            INSERT INTO `jurassicParkDB`.`employee` (rfc)
+				VALUES (OLD.rfc)
+				on duplicate key update updated_at=now();
+        END IF;
+    END;
+///
+DELIMITER ;
+
 
 DELIMITER $$
 CREATE TRIGGER trig_zone_type_check BEFORE INSERT ON zone
@@ -23,3 +38,5 @@ IF NEW.type = 'dinosaur' THEN
 END IF; 
 END$$
 DELIMITER ;
+
+

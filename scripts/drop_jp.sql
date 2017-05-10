@@ -69,3 +69,5 @@ drop table `jurassicParkDB`.`dinosaur_safety_requirement`;
 SET FOREIGN_KEY_CHECKS=1;
 
 drop database jurassicParkDB;
+
+DROP USER 'jpAdmin'@'localhost';

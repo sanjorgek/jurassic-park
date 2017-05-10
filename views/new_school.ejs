@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>
+      Opciones de creación de escuelas
+    </p>
+    <form action="/schools" method="post">
+      Nombre:<br>
+      <input type="text" name="name"><br>
+      Codigo Postal:<br>
+      <input type="text" name="pc"><br>
+      Numero:<br>
+      <input type="text" name="number"><br>
+      Calle:<br>
+      <input type="text" name="street"><br>
+      Colonia:<br>
+      <input type="text" name="district"><br>
+      Ciudad:<br>
+      <input type="text" name="city"><br>
+      Estado:<br>
+      <input type="text" name="state"><br>
+      País:<br>
+      <input type="text" name="country"><br>
+      Email principal:<br>
+      <input type="text" name="email"><br>
+      Telefono principal:<br>
+      <input type="text" name="telephone"><br>
+      <input type="submit" value="Crear">
+    </form>
+  </body>
+</html>

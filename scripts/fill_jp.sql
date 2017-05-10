@@ -19,25 +19,51 @@ INSERT INTO `jurassicParkDB`.`city` (`name`,`state_id`)
     ('Juneau',4),
     ('Albi',5);
 
-INSERT INTO `jurassicParkDB`.`address` (`number`,`pc`,`street`,`district`,`city_id`)
-  VALUES (12,930896,'312-3140 Dui Avenue','Neder-Over-Heembeek',4),
-  (49,977925,'P.O. Box 538, 7496 Sed Rd.','Bhavnagar',1),
-  (38,934986,'9425 Ac, St.','Vliermaalroot',3),
-  (85,392624,'754-2962 Facilisis, St.','Sovizzo',6),
-  (69,192142,'Ap #399-1396 Posuere Rd.','Osgoode',4),
-  (75,54101,'9181 In Street','Auburn',5),
-  (39,757263,'P.O. Box 809, 9561 Posuere Avenue','Rugby',2),
-  (78,466756,'441-756 Arcu. Ave','Filignano',6),
-  (85,219246,'3419 Luctus St.','Cabras',2),
-  (44,408949,'Ap #218-1839 Euismod St.','Shediac',6),
-  (65,310432,'Ap #906-6121 Nulla. Street','Pettineo',4),
-  (39,400968,'480-3364 Nulla Rd.','Minna',6),
-  (73,609411,'Ap #359-7481 Integer Road','Cap-Rouge',2),
-  (65,239885,'P.O. Box 399, 5004 Massa Ave','Naperville',2),
-  (11,7069549,'Ap #648-9374 Interdum. Rd.','Pomarico',2),
-  (83,9063897,'P.O. Box 856, 6072 Dolor St.','Raymond',2),
-  (68,658374,'4983 Hendrerit Av.','Vejalpur',6),
-  (52,5741577,'793-6570 Donec Rd.','Rae Bareli',2),(48,191239,'447 Metus Avenue','Hisar',2),(94,5865311,'P.O. Box 600, 8477 Et Rd.','Coevorden',4),(98,3202032,'719-1089 A, Rd.','Udaipur',3),(31,3475258,'Ap #573-8057 Mauris Rd.','Lives-sur-Meuse',3),(54,1331711,'784-2486 Nunc Road','Coinco',2),(16,4900737,'Ap #873-9931 Imperdiet Street','Springfield',1),(4,9070113,'869-3627 Vitae Street','Rouvroy',3),(62,8513164,'Ap #396-660 Et Road','Londrina',5),(77,2103729,'2069 Sed Road','Dilbeek',1),(3,3381529,'P.O. Box 363, 7286 Non St.','Finkenstein am Faaker See',4),(84,5376745,'P.O. Box 869, 5964 Ac St.','Magdeburg',2),(81,5035209,'P.O. Box 612, 1421 Pede. Avenue','Cabras',2),(39,7378657,'433-3063 Convallis, Ave','Habergy',6),(46,7227717,'P.O. Box 438, 9945 Pharetra St.','Buzenol',6),(91,7885627,'P.O. Box 775, 7295 Facilisis Av.','Oxford County',5),(71,6135689,'P.O. Box 135, 3213 A Road','Gibsons',2),(57,9789391,'6209 Auctor Ave','Erquelinnes',5),(86,1542076,'P.O. Box 369, 6944 A Rd.','Williams Lake',5),(64,2763972,'P.O. Box 492, 6706 Vitae Avenue','Chicago',6),(46,8526328,'P.O. Box 281, 5915 Et Ave','Castel Colonna',3),(57,8489757,'Ap #848-3260 Pharetra Rd.','Newport News',1),(11,730442,'1495 Arcu. Rd.','Montes Claros',4),(50,1774096,'P.O. Box 710, 6341 Porta St.','Minneapolis',4),(17,1886405,'2266 At Street','Bissegem',4),(16,4488085,'Ap #532-4542 Mauris St.','Namen',4),(5,6958218,'7411 Tortor. Road','Crotta d\'Adda',5);
+INSERT INTO `jurassicParkDB`.`address` (`pc`,`street`,`district`,`city_id`)
+  VALUES (930896,'312-3140 Dui Avenue','Neder-Over-Heembeek',4),
+  (977925,'P.O. Box 538, 7496 Sed Rd.','Bhavnagar',1),
+  (934986,'9425 Ac, St.','Vliermaalroot',3),
+  (392624,'754-2962 Facilisis, St.','Sovizzo',6),
+  (192142,'Ap #399-1396 Posuere Rd.','Osgoode',4),
+  (54101,'9181 In Street','Auburn',5),
+  (757263,'P.O. Box 809, 9561 Posuere Avenue','Rugby',2),
+  (466756,'441-756 Arcu. Ave','Filignano',6),
+  (219246,'3419 Luctus St.','Cabras',2),
+  (408949,'Ap #218-1839 Euismod St.','Shediac',6),
+  (310432,'Ap #906-6121 Nulla. Street','Pettineo',4),
+  (400968,'480-3364 Nulla Rd.','Minna',6),
+  (609411,'Ap #359-7481 Integer Road','Cap-Rouge',2),
+  (239885,'P.O. Box 399, 5004 Massa Ave','Naperville',2),
+  (7069549,'Ap #648-9374 Interdum. Rd.','Pomarico',2),
+  (9063897,'P.O. Box 856, 6072 Dolor St.','Raymond',2),
+  (658374,'4983 Hendrerit Av.','Vejalpur',6),
+  (5741577,'793-6570 Donec Rd.','Rae Bareli',2),
+  (191239,'447 Metus Avenue','Hisar',2),
+  (5865311,'P.O. Box 600, 8477 Et Rd.','Coevorden',4),
+  (3202032,'719-1089 A, Rd.','Udaipur',3),
+  (3475258,'Ap #573-8057 Mauris Rd.','Lives-sur-Meuse',3),
+  (1331711,'784-2486 Nunc Road','Coinco',2),
+  (4900737,'Ap #873-9931 Imperdiet Street','Springfield',1),
+  (9070113,'869-3627 Vitae Street','Rouvroy',3),
+  (8513164,'Ap #396-660 Et Road','Londrina',5),
+  (2103729,'2069 Sed Road','Dilbeek',1),
+  (3381529,'P.O. Box 363, 7286 Non St.','Finkenstein am Faaker See',4),
+  (5376745,'P.O. Box 869, 5964 Ac St.','Magdeburg',2),
+  (5035209,'P.O. Box 612, 1421 Pede. Avenue','Cabras',2),
+  (7378657,'433-3063 Convallis, Ave','Habergy',6),
+  (7227717,'P.O. Box 438, 9945 Pharetra St.','Buzenol',6),
+  (7885627,'P.O. Box 775, 7295 Facilisis Av.','Oxford County',5),
+  (6135689,'P.O. Box 135, 3213 A Road','Gibsons',2),
+  (9789391,'6209 Auctor Ave','Erquelinnes',5),
+  (1542076,'P.O. Box 369, 6944 A Rd.','Williams Lake',5),
+  (2763972,'P.O. Box 492, 6706 Vitae Avenue','Chicago',6),
+  (8526328,'P.O. Box 281, 5915 Et Ave','Castel Colonna',3),
+  (8489757,'Ap #848-3260 Pharetra Rd.','Newport News',1),
+  (730442,'1495 Arcu. Rd.','Montes Claros',4),
+  (1774096,'P.O. Box 710, 6341 Porta St.','Minneapolis',4),
+  (1886405,'2266 At Street','Bissegem',4),
+  (4488085,'Ap #532-4542 Mauris St.','Namen',4),
+  (6958218,'7411 Tortor. Road','Crotta d\'Adda',5);
 
 INSERT INTO `jurassicParkDB`.`school` (`name`,`code`,`address_id`)
   VALUES 
@@ -263,7 +289,7 @@ INSERT INTO `jurassicParkDB`.`scientist` (`rfc`,`license`)
         ('VCO080307GZ8','566649'),
         ('GQU821028223','55989699');
 
-INSERT INTO `police` (`rfc`,`radio_code`,`is_armed`) 
+INSERT INTO `jurassicParkDB`.`police` (`rfc`,`radio_code`,`is_armed`) 
 	VALUES
 		('FAFE630306MJ3',3192,0),
         ('CSQ780524D56',5658,0),
