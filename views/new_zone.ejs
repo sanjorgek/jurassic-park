@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>
+      Añadir nuevo estudiante
+    </p>
+    <form action="/zone/<%= zone_id %>/new_student" method="post">
+      Nombre:<br>
+      <input type="text" name="name"><br>
+      <input type="submit" value="Crear">
+    </form>
+  </body>
+</html>

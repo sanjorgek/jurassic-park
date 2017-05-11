@@ -52,7 +52,7 @@ const findGradesByOneID = (query) => (cb) => {
   waterfall(
     [
       function(next) {
-        let querySQL = "select RZ.grade\n"+
+        let querySQL = "select RZ.id, RZ.grade\n"+
           "from `jurassicParkDB`.`reservation` as R\n"+
           "inner join `jurassicParkDB`.`reserve_zone` as RZ on RZ.reservation_id=R.id\n"+
           "where RZ.reservation_id="+query.reservation_id+"\n"+
@@ -75,14 +75,14 @@ const findZonesOneByID = (query) => (cb) => {
           "inner join reserve_zone as RZ on RZ.visit_type_code=VT.code and RZ.visit_type_id=VT.id\n"+
           "left join student as St on St.reserve_zone_id=RZ.id\n"+
           "inner join (select Vs.reserve_zone_id, group_concat(Dn.name) as 'dino_names'\n"+
-          "from visit as Vs\n"+
-          "inner join zone as Zn on Zn.code=Vs.zone_code\n"+
-          "inner join dinosaur as Dn on Dn.zone_code=Zn.code\n"+
-          "group by Vs.reserve_zone_id) as DZ on DZ.reserve_zone_id=RZ.id\n"+
+          "  from visit as Vs\n"+
+          "  inner join zone as Zn on Zn.code=Vs.zone_code\n"+
+          "  inner join dinosaur as Dn on Dn.zone_code=Zn.code\n"+
+          "  group by Vs.reserve_zone_id) as DZ on DZ.reserve_zone_id=RZ.id\n"+
+          "left join ticket as Tk on Tk.student_id=St.id\n"+
           "where RZ.reservation_id="+query.reservation_id+"\n"+
           "group by St.name\n"+
           "order by VT.id;";
-        console.log(querySQL);
         next(null, querySQL);
       },
       connection
