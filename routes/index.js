@@ -18,4 +18,8 @@ router.get('/new_school', function(req, res, next) {
   res.render('new_school', {title: 'Jurassic Park', });
 });
 
+router.get('/new_employee', function(req, res, next) {
+  res.render('new_employee', {title: 'Jurassic Park', });
+});
+
 module.exports = router;

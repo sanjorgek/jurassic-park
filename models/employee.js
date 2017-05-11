@@ -27,6 +27,21 @@ const findList = (query) => (cb) => {
   );
 };
 
+const createOne = function(query){
+  return function(cb) {
+    waterfall([
+      function(next) {
+        let querySQL = "INSERT INTO employee (rfc,names,father_last_name,mother_last_name,telephone,email,address_id)" +
+          "VALUES ('"+query.rfc+"','"+ query.names +"','"+ query.father_last_name +"','"+ query.mother_last_name +"','"+ query.telephone +"','"+ query.email +"',(select Ad.id from address as Ad inner join city as Cy on Ad.city_id=Cy.id inner join state as St on Cy.state_id=St.id inner join country as Ct on Ct.id=St.country_id where St.name='"+query.state+"' and Ct.name='"+query.country+"' and Cy.name='"+query.city+"' and Ad.pc='"+query.pc+"' and Ad.street='"+query.number+", "+query.street+"' and Ad.district='"+query.district+"'))" +
+          "on duplicate key update updated_at=now();";
+        next(null, querySQL);
+      },
+      connection
+    ], cb);
+  }
+};
+
 module.exports = {
-  findList
+  findList,
+  createOne
 };

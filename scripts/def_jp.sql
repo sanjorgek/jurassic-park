@@ -172,6 +172,9 @@ create table `jurassicParkDB`.`employee`(
   telephone					varchar(255) not null,
   day_off					enum('lunes','martes','miercoles','jueves','viernes','sabado','domingo'),
   address_id			bigint not null,
+  created_at                datetime DEFAULT CURRENT_TIMESTAMP,
+  updated_at                datetime ON UPDATE CURRENT_TIMESTAMP,
+  deleted_at                datetime,
   constraint pk_employee_1 primary key (rfc),
   constraint ck_employee_1 check(rfc regexp '^[A-Z&]{3,4}[0-9]{6}([A-Z&]{2}|[0-9]{2}|[A-Z&][0-9]|[0-9][A-Z&])([A]|[0-9])'),
   constraint ck_employee_2 check(email regexp '^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9._-]@[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,4}$')

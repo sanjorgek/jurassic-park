@@ -33,7 +33,7 @@ app.use('/schools', schools);
 app.use('/reservations', reservations);
 app.use('/reserve_zones', reserveZones);
 app.use('/zones', zones);
-app.use('/employee', employees);
+app.use('/employees', employees);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

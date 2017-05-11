@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><a href="/"><%= title %></a></h1>
+    <p>
+      Opciones de creación de empleados
+    </p>
+    <form action="/employees" method="post">
+      RFC:<br>
+      <input type="text" name="rfc"><br>
+      Nombre:<br>
+      <input type="text" name="names"><br>
+      Apellido paterno:<br>
+      <input type="text" name="father_last_name"><br>
+      Apellido materno:<br>
+      <input type="text" name="mother_last_name"><br>
+      Codigo Postal:<br>
+      <input type="text" name="pc"><br>
+      Numero:<br>
+      <input type="text" name="number"><br>
+      Calle:<br>
+      <input type="text" name="street"><br>
+      Colonia:<br>
+      <input type="text" name="district"><br>
+      Ciudad:<br>
+      <input type="text" name="city"><br>
+      Estado:<br>
+      <input type="text" name="state"><br>
+      País:<br>
+      <input type="text" name="country"><br>
+      Email:<br>
+      <input type="text" name="email"><br>
+      Telefono:<br>
+      <input type="text" name="telephone"><br>
+      <input type="submit" value="Crear">
+    </form>
+  </body>
+</html>

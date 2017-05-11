@@ -12,5 +12,23 @@ module.exports = (models) => {
     });
   });
 
+  router.post('/', function(req, res, next) {
+    debug(req.body);
+    let query = req.body;
+    waterfall(
+      [
+        models.Address.createOne(req.body),
+        function(newAddress, next) {
+          models.Employee.createOne(req.body)(next);
+        }
+      ],
+      function(err, result) {
+        debug(result);
+        if(err) return next(err);
+        else res.redirect('/employees');
+      }
+    );
+  });
+
   return router;
 };
