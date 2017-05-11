@@ -3,11 +3,20 @@
 #
 
 # Reservaciones e info de la escuela
-select R.id as 'reservation_id', R.visit_date, Sc.code as 'school_code', Sc.name as 'school_name', R.created_at, R.updated_at
+select R.id as 'reservation_id', R.visit_date, R.visit_hour, Sc.code as 'school_code', Sc.name as 'school_name', group_concat(RZ.id), group_concat(RZ.grade), R.created_at, R.updated_at
 	from `jurassicParkDB`.`reservation` as R
-	inner join `jurassicParkDB`.`school` as Sc
-    on Sc.id=R.school_id and Sc.code=R.school_code
+	inner join `jurassicParkDB`.`school` as Sc on Sc.id=R.school_id and Sc.code=R.school_code
+    left join `jurassicParkDB`.`reserve_zone` as RZ on RZ.reservation_id=R.id
+    group by R.id
     order by R.visit_date;
+    
+select R.id as 'reservation_id', R.visit_date, R.visit_hour, Sc.code as 'school_code', Sc.name as 'school_name', group_concat(RZ.id), group_concat(RZ.grade), R.created_at, R.updated_at
+  from `jurassicParkDB`.`reservation` as R
+  inner join `jurassicParkDB`.`school` as Sc on Sc.id=R.school_id and Sc.code=R.school_code
+  left join `jurassicParkDB`.`reserve_zone` as RZ on RZ.reservation_id=R.id
+  where R.visit_date>='2017-05-10'
+  group by R.id
+  order by R.visit_date;
 
 # Lista de alumnos con costo de boleto y las zonas a las que tienen acceso
 # ordenas por tipo de visita
@@ -41,4 +50,10 @@ select Ad.id, Ad.pc, Ad.street, Ad.district, Ct.name as 'city_name', St.name as 
     inner join `jurassicParkDB`.`city` as Ct on Ad.city_id=Ct.id
     inner join `jurassicParkDB`.`state` as St on Ct.state_id=St.id
     inner join `jurassicParkDB`.`country` as Co on Co.id=St.country_id;
+    
+# tipos de reservacion y costos activos
+select VT.id, VT.code, VT.name, PV.cost 
+	from `jurassicParkDB`.`visit_type` as VT
+    inner join `jurassicParkDB`.`product_visit` as PV on VT.id=PV.visit_type_id and VT.code=PV.visit_type_code
+    where PV.is_active;
 

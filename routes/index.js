@@ -6,8 +6,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Jurassic Park' });
 });
 
-router.get('/reservations', function(req, res, next) {
-  res.render('reservation_index', {title: 'Jurassic Park', });
+router.get('/reservations_options', function(req, res, next) {
+  res.render('reservation_options', {title: 'Jurassic Park', });
 });
 
 router.get('/new_reservation', function(req, res, next) {

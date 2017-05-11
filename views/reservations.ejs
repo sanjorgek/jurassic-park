@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      table, th, td {
+          border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Reservaciones: </p>
+    <p>
+      <table style="width:100%">
+        <tr>
+          <th>#</th>
+          <th>id</th>
+          <th>Codigo de Escuela</th>
+          <th>Nombre de Escuela</th>
+          <th>Fecha de visita</th>
+          <th>Zonas</th>
+          <th>Grupos</th>
+          <th>Editar</th>
+          <th>Borrar</th>
+        </tr>
+          <% for(var i=0; i<reservations.length; i++){ %>
+            <tr>
+              <td><%= i %></td>
+              <td><%= reservations[i].reservation_id %></td>
+              <td><%= reservations[i].school_code %></td>
+              <td><%= reservations[i].school_name %></td>
+              <td><%= reservations[i].visit_date.toISOString().split("T")[0] %></td>
+              <td><%= reservations[i].zones %></td>
+              <td><%= reservations[i].grades %></td>
+              <td><a href="/reservations/<%= reservations[i].school_code %>">Editar</a></td>
+              <td><a href="/reservations/<%= reservations[i].school_code %>/delete">Borrar</a></td>
+            </tr>
+          <% } %>
+      </table>
+    </p>
+  </body>
+</html>

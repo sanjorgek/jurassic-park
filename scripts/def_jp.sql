@@ -89,7 +89,8 @@ create table `jurassicParkDB`.`reservation` (
   id						bigint auto_increment not null,
   school_id					bigint not null,
   school_code				varchar(255) not null,
-  visit_date                datetime not null,
+  visit_date                date not null,
+  visit_hour                time not null,
   method					enum('telephone', 'email'),
   created_at                datetime DEFAULT CURRENT_TIMESTAMP,
   updated_at                datetime ON UPDATE CURRENT_TIMESTAMP,
@@ -347,6 +348,8 @@ alter table `jurassicParkDB`.`student` add
   constraint uq_student unique (reserve_zone_id, name);
 alter table `jurassicParkDB`.`ticket` add
   constraint uq_ticket unique (code);
+alter table `jurassicParkDB`.`reservation` add
+  constraint uq_reservation_1 unique (school_id,school_code,visit_date);
 
 #
 # Foreign

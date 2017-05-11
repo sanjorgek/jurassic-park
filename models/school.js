@@ -6,7 +6,7 @@ const findList = function(query){
   return function(cb) {
     waterfall([
       function(next) {
-        let querySQL = "select Sc.id as 'school_id', Sc.code as 'school_code', Sc.name as 'school_name', Ad.pc, Ad.street, Ct.name as 'city_name', St.name as 'state_name', Co.name as 'country_name', group_concat(ScT.telephone) as 'telephones', group_concat(ScE.email) as 'emails', Sc.created_at, Sc.updated_at\n"+
+        let querySQL = "select Sc.id as 'school_id', Sc.code as 'school_code', Sc.name as 'school_name', Ad.pc, Ad.street, Ad.district, Ct.name as 'city_name', St.name as 'state_name', Co.name as 'country_name', group_concat(ScT.telephone) as 'telephones', group_concat(ScE.email) as 'emails', Sc.created_at, Sc.updated_at\n"+
         "from school as Sc\n"+
         "left join school_telephone as ScT on Sc.id=ScT.school_id and Sc.code=ScT.school_code\n"+
         "left join school_email as ScE on Sc.id=ScE.school_id and Sc.code=ScE.school_code\n"+
@@ -53,8 +53,7 @@ const findOne = function(query){
   }
 };
 
-/**
-const findByID = function(query){
+const findByCode = function(query){
   return function(cb) {
     waterfall([
       function(next) {
@@ -66,7 +65,7 @@ const findByID = function(query){
           "inner join city as Ct on Ad.city_id=Ct.id\n"+
           "inner join state as St on Ct.state_id=St.id\n"+
           "inner join country as Co on Co.id=St.country_id\n"+
-          "where Sc.code='"+query.uuid+"'\n"+
+          "where Sc.code='"+query.code+"'\n"+
           "group by Sc.id, Sc.code\n"+
           "order by Sc.id;\n";
         next(null, querySQL);
@@ -80,7 +79,6 @@ const findByID = function(query){
     ], cb);
   }
 };
-*/
 
 const createOne = function(query){
   return function(cb) {
@@ -109,13 +107,12 @@ const createOne = function(query){
         findOne(query)(next);
       }
     ], cb);
-
   }
 };
 
 module.exports = {
   findList,
   findOne,
-  //findByID,
+  findByCode,
   createOne
 };
