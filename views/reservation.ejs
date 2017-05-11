@@ -22,20 +22,18 @@
           <th>Alumno</th>
           <th>Zonas</th>
           <th>Costos</th>
-          <th>Editar</th>
-          <th>Cobrar</th> 
+          <th>Cobrar</th>
         </tr>
           <% for(var i=0; i<reservations.length; i++){ %>
             <tr>
               <td><%= i+1 %></td>
-              <td><%= reservations[i].id %></td>
+              <td><%= reservations[i].student_id %></td>
               <td><%= reservations[i].visit_type_code %></td>
               <td><%= reservations[i].principal_teacher %></td>
               <td><%= reservations[i].name %></td>
               <td><%= reservations[i].dino_names %></td>
               <td><%= reservations[i].costs %></td>
-              <td><a href="/reservation/<%= reservations[i].reservation_id %>">Editar</a></td>
-              <td><a href="/reservation/<%= reservations[i].reservation_id %>/collect">Cobrar</a></td>
+              <td><a href="/student/<%= reservations[i].student_id %>/collect">Cobrar</a></td>
             </tr>
           <% } %>
       </table>
@@ -53,10 +51,11 @@
               <td><%= i+1 %></td>
               <td><%= grades[i].grade %></td>
 
-              <td><a href="/reservation/<%= reservations[i].reservation_id %>/new_student">Añadir</a></td>
+              <td><a href="/reservation/<%= reservation_id %>/new_student">Añadir</a></td>
             </tr>
           <% } %>
       </table>
     </p>
+    <p><a href="/reservation/<%= reservation_id %>/grade">Nuevo grado</a></p>
   </body>
 </html>

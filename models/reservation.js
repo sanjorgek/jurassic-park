@@ -69,7 +69,7 @@ const findZonesOneByID = (query) => (cb) => {
   waterfall(
     [
       function(next) {
-        let querySQL = "select RZ.id, PV.visit_type_code, RZ.principal_teacher, group_concat(PV.cost) as 'costs', St.name, DZ.dino_names\n"+
+        let querySQL = "select St.id as 'student_id', PV.visit_type_code, RZ.principal_teacher, group_concat(PV.cost) as 'costs', St.name, DZ.dino_names\n"+
           "from visit_type as VT\n"+
           "inner join product_visit as PV on VT.code=PV.visit_type_code and VT.id=PV.visit_type_id and PV.is_active\n"+
           "inner join reserve_zone as RZ on RZ.visit_type_code=VT.code and RZ.visit_type_id=VT.id\n"+

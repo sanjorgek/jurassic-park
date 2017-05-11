@@ -24,7 +24,7 @@ module.exports = (models) => {
     ], function(err, result) {
       if(err) return next(err);
       debug(result);
-      return res.render('reservation', {title: 'Jurassic Park', reservations: result.reservations, grades: result.grades});
+      return res.render('reservation', {title: 'Jurassic Park', reservation_id: req.params.reservationId, reservations: result.reservations, grades: result.grades});
     });
   });
 
