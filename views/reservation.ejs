@@ -18,26 +18,24 @@
           <th>#</th>
           <th>id</th>
           <th>Tipo de visita</th>
+          <th>Profesor principal</th>
           <th>Alumno</th>
-          <th>Grado</th>
           <th>Zonas</th>
-          <th>Grupos</th>
+          <th>Costos</th>
           <th>Editar</th>
-          <th>Cobrar</th>
-          <th>Borrar</th>
+          <th>Cobrar</th> 
         </tr>
           <% for(var i=0; i<reservations.length; i++){ %>
             <tr>
               <td><%= i+1 %></td>
-              <td><%= reservations[i].reservation_id %></td>
-              <td><%= reservations[i].visit_name %></td>
-              <td><%= reservations[i].student_name %></td>
-              <td><%= reservations[i].reservation_zone_grade %></td>
-              <td><%= reservations[i].dino_zones %></td>
-              <td><%= reservations[i].reservation_zone_grade %></td>
+              <td><%= reservations[i].id %></td>
+              <td><%= reservations[i].visit_type_code %></td>
+              <td><%= reservations[i].principal_teacher %></td>
+              <td><%= reservations[i].name %></td>
+              <td><%= reservations[i].dino_names %></td>
+              <td><%= reservations[i].costs %></td>
               <td><a href="/reservation/<%= reservations[i].reservation_id %>">Editar</a></td>
               <td><a href="/reservation/<%= reservations[i].reservation_id %>/collect">Cobrar</a></td>
-              <td><a href="/reservation/<%= reservations[i].reservation_id %>/delete">Borrar</a></td>
             </tr>
           <% } %>
       </table>

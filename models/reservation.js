@@ -69,17 +69,20 @@ const findZonesOneByID = (query) => (cb) => {
   waterfall(
     [
       function(next) {
-        let querySQL = "select RZ.reservation_id, VT.name as 'visit_name', RZ.id as 'reservation_zone_id', RZ.grade as 'reservation_zone_grade', group_concat(D.name) as 'dino_zones', RZ.principal_teacher, VT.code as 'visit_code', VT.id as 'visit_id', St.id as 'student_id', St.name as 'student_name', PV.cost as 'ticket_cost'"+
-          "from reserve_zone as RZ\n"+
-          "left join visit as Vi on RZ.id=Vi.reserve_zone_id\n"+
-          "inner join zone as Z on Vi.zone_code=Z.code\n"+
-          "inner join dinosaur as D on D.zone_code=Z.code\n"+
-          "inner join visit_type as VT on VT.code=RZ.visit_type_code and VT.id=RZ.visit_type_id\n"+
+        let querySQL = "select RZ.id, PV.visit_type_code, RZ.principal_teacher, group_concat(PV.cost) as 'costs', St.name, DZ.dino_names\n"+
+          "from visit_type as VT\n"+
+          "inner join product_visit as PV on VT.code=PV.visit_type_code and VT.id=PV.visit_type_id and PV.is_active\n"+
+          "inner join reserve_zone as RZ on RZ.visit_type_code=VT.code and RZ.visit_type_id=VT.id\n"+
           "left join student as St on St.reserve_zone_id=RZ.id\n"+
-          "inner join product_visit as PV on PV.visit_type_code=VT.code and PV.visit_type_id=VT.id and PV.is_active\n"+
+          "inner join (select Vs.reserve_zone_id, group_concat(Dn.name) as 'dino_names'\n"+
+          "from visit as Vs\n"+
+          "inner join zone as Zn on Zn.code=Vs.zone_code\n"+
+          "inner join dinosaur as Dn on Dn.zone_code=Zn.code\n"+
+          "group by Vs.reserve_zone_id) as DZ on DZ.reserve_zone_id=RZ.id\n"+
           "where RZ.reservation_id="+query.reservation_id+"\n"+
-          "group by St.id, PV.cost\n"+
+          "group by St.name\n"+
           "order by VT.id;";
+        console.log(querySQL);
         next(null, querySQL);
       },
       connection

@@ -21,7 +21,6 @@
           <th>Direccion</th>
           <th>Telefonos</th>
           <th>Mails</th>
-          <th>Editar</th>
           <th>Crear reservación</th>
         </tr>
           <% for(var i=0; i<schools.length; i++){ %>
@@ -32,7 +31,6 @@
               <td><%= schools[i].street %>, <%= schools[i].district %>, CP <%= schools[i].pc %> <%= schools[i].city_name %>, <%= schools[i].state_name %>, <%= schools[i].country_name %></td>
               <td><%= schools[i].telephones %></td>
               <td><%= schools[i].emails %></td>
-              <td></td>
               <td><a href="/schools/<%= schools[i].school_code %>/new_reservation">Reservar</a></td>
             </tr>
           <% } %>
