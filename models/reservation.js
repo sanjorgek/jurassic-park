@@ -108,10 +108,25 @@ const createOne = (query) => (cb) => {
   );
 };
 
+const deleteById = (query) => (cb) => {
+  waterfall(
+    [
+      function(next) {
+        let querySQL = "DELETE FROM reservation\n"+
+          " WHERE id="+query.reservation_id+";";
+        next(null, querySQL);
+      },
+      connection
+    ],
+    cb
+  );
+}
+
 module.exports = {
   findList,
   findOneByDateSchool,
   findZonesOneByID,
   findGradesByOneID,
-  createOne
+  createOne,
+  deleteById
 };

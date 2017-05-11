@@ -23,6 +23,23 @@ const findList = (query) => (cb) => {
   );
 }
 
+const findList2 = (query) => (cb) => {
+  waterfall(
+    [
+      function(next) {
+        let querySQL = "select Zn.code, Zn.type, Dn.name, Dn.id\n"+
+          " from zone as Zn\n"+
+          " left join dinosaur as Dn on Zn.code=Dn.zone_code\n"+
+          " order by Zn.type;";
+        next(null, querySQL);
+      },
+      connection
+    ],
+    cb
+  );
+}
+
 module.exports = {
-  findList
+  findList,
+  findList2
 };

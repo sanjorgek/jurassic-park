@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      table, th, td {
+          border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><a href="/"><%= title %></a></h1>
+    <p>Zonas: </p>
+    <p>
+      <table style="width:100%">
+        <tr>
+          <th>#</th>
+          <th>Codigo de Zona</th>
+          <th>Tipo de zona</th>
+          <th>Nombre del dinosaurio</th>
+          <th>Ver dinosaurio</th>
+        </tr>
+          <% for(var i=0; i<zones.length; i++){ %>
+            <tr>
+              <td><%= i+1 %></td>
+              <td><%= zones[i].code %></td>
+              <td><%= zones[i].type %></td>
+              <% if(zones[i].type=="dinosaurio"){ %>
+                <td><%= zones[i].name %></td>
+                <td><a href="/zones/<%= zones[i].code %>">Ver</a></td>
+              <% }else{ %>
+                <td></td>
+                <td></td>
+              <% } %>
+            </tr>
+          <% } %>
+      </table>
+    </p>
+  </body>
+</html>

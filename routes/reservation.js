@@ -26,6 +26,13 @@ module.exports = (models) => {
     });
   });
 
+  router.get('/:reservationId/delete', function(req, res, next) {
+    models.Reservation.deleteById({reservation_id: req.params.reservationId})(function(err, result) {
+      if(err) return next(err);
+      res.redirect("/reservations/");
+    });
+  });
+
   router.get('/:reservationId/new_grade', function(req, res, next) {
     waterfall(
       [

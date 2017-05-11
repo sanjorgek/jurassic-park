@@ -22,6 +22,7 @@
           <th>Fecha de visita</th>
           <th>Hora de visita</th>
           <th>Editar</th>
+          <th>Borrar</th>
         </tr>
           <% for(var i=0; i<reservations.length; i++){ %>
             <tr>
@@ -32,6 +33,7 @@
               <td><%= reservations[i].visit_date.toISOString().split("T")[0] %></td>
               <td><%= reservations[i].visit_hour %></td>
               <td><a href="/reservations/<%= reservations[i].reservation_id %>">Editar</a></td>
+              <td><a href="/reservations/<%= reservations[i].reservation_id %>/delete">Borrar</a></td>
             </tr>
           <% } %>
       </table>
