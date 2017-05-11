@@ -8,7 +8,6 @@ module.exports = (models) => {
   router.get('/', function(req, res, next) {
     models.Reservation.findList({isActive: true})(function(err, reservations) {
       if(err) return next(err);
-      debug(reservations);
       return res.render('reservations', {title: 'Jurassic Park', reservations: reservations});
     });
   });
@@ -23,7 +22,6 @@ module.exports = (models) => {
       }
     ], function(err, result) {
       if(err) return next(err);
-      debug(result);
       return res.render('reservation', {title: 'Jurassic Park', reservation_id: req.params.reservationId, reservations: result.reservations, grades: result.grades});
     });
   });
@@ -34,7 +32,6 @@ module.exports = (models) => {
         models.VisitType.findList({ reservation_id: req.params.reservationId })
       ],
       function(err, result) {
-        console.log(result);
         if(err) return next(err);
         res.render('new_grade', { title: 'Jurassic Park', reservation_id: req.params.reservationId, visit_types: result });
       }
@@ -42,7 +39,6 @@ module.exports = (models) => {
   });
 
   router.post('/:reservationId/new_grade', function(req, res, next) {
-    console.log(req.body);
     let visit_type = req.body.visit_type.split(" ");
     waterfall(
       [
@@ -59,6 +55,14 @@ module.exports = (models) => {
         res.redirect("/reservations/"+req.params.reservationId);
       }
     );
+  });
+
+  router.get('/:reservationId/students/:studentId/delete', function(req, res, next) {
+    console.log(req.params);
+    models.Student.deleteById({ student_id: req.params.studentId })(function(err, result) {
+      if(err) return next(err);
+      res.redirect("/reservations/"+req.params.reservationId);
+    });
   });
 
   return router;

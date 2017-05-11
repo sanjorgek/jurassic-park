@@ -16,6 +16,21 @@ const createOne = (query) => (cb) => {
   );
 };
 
+const deleteById = (query) => (cb) => {
+  waterfall(
+    [
+      function(next) {
+        let querySQL = "DELETE FROM student\n"+
+          " WHERE id="+query.student_id+";";
+         next(null, querySQL);
+      },
+      connection
+    ],
+    cb
+  );
+};
+
 module.exports = {
-  createOne
+  createOne,
+  deleteById
 };

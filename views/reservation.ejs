@@ -22,6 +22,7 @@
           <th>Alumno</th>
           <th>Zonas</th>
           <th>Costos</th>
+          <th>Borrar</th>
         </tr>
           <% for(var i=0; i<reservations.length; i++){ %>
             <tr>
@@ -32,6 +33,11 @@
               <td><%= reservations[i].name %></td>
               <td><%= reservations[i].dino_names %></td>
               <td><%= reservations[i].costs %></td>
+              <% if(reservations[i].student_id){ %>
+                <td><a href="/reservations/<%= reservation_id %>/students/<%= reservations[i].student_id %>/delete">Borrar</a></td>
+              <% }else{ %>
+                <td></td>
+              <% } %>
             </tr>
           <% } %>
       </table>
