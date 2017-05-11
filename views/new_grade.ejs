@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>
+      Datos del grado
+    </p>
+    <form method="post">
+      Grado:<br>
+      <input type="text" name="grade"><br>
+      Maestro principal:<br>
+      <input type="text" name="principal_teacher"><br>
+      Tipo de visita
+      <select name="visit_type">
+        <% for(var i=0; i< visit_types.length; i++){ %>
+          <option value="<%= visit_types[i].id %> <%= visit_types[i].code  %>"><%= visit_types[i].name %></option>
+        <% } %>
+      </select>
+      <input type="submit" value="Crear">
+    </form>
+  </body>
+</html>

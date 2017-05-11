@@ -3,7 +3,7 @@ const Student = require('./student');
 const Address = require('./address');
 const Reservation = require('./reservation');
 const VisitType = require('./visit_type');
-const Zone = require('./zone');
+const ReserveZone = require('./reserve_zone');
 
 module.exports = {
   Address,
@@ -11,5 +11,5 @@ module.exports = {
   School,
   Student,
   VisitType,
-  Zone
+  ReserveZone
 };

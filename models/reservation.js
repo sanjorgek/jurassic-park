@@ -35,6 +35,7 @@ const findOneByDateSchool = (query) => (cb) => {
         "where R.id='"+query.reservation_id+"'\n"+
         "group by R.id\n"+
         "order by R.visit_date;";
+        console.log(querySQL);
         next(null, querySQL);
       },
       connection,
@@ -100,10 +101,7 @@ const createOne = (query) => (cb) => {
           "on duplicate key update updated_at=now();";
         next(null, querySQL);
       },
-      connection,
-      function(rows, next) {
-        findOneByDateSchool(query)(next);
-      }
+      connection
     ],
     cb
   );

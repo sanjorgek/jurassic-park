@@ -7,13 +7,13 @@ const debug = require('debug')('jurassic-park:school');
 module.exports = (models) => {
   router.get('/', function(req, res, next) {
     models.School.findList({})(function(err, schools) {
-      if(err) return next(400);
+      if(err) return next(err);
       debug(schools);
       return res.render('schools', {title: 'Jurassic Park', schools: schools});
     });
   });
 
-  router.post('/', function(req, res) {
+  router.post('/', function(req, res, next) {
     debug(req.body);
     let query = req.body;
     query.uuid = uuid();
@@ -26,7 +26,7 @@ module.exports = (models) => {
       ],
       function(err, result) {
         debug(result);
-        if(err) res.send(400, {error: err});
+        if(err) return next(err);
         else res.redirect('/schools');
       }
     );
@@ -75,8 +75,7 @@ module.exports = (models) => {
       function(err, result) {
         debug(result);
         if(err) return next(err);
-        res.redirect('/reservations/'+result.reservation);
-        //res.render('new_school_reservation', {title: 'Jurassic Park', school: result.school});
+        res.redirect('/reservations');
       }
     );
   });
