@@ -12,5 +12,12 @@ module.exports = (models) => {
     });
   });
 
+  router.get('/:zoneId', function(req, res, next) {
+    models.Zone.findOneById({ zone_id: req.params.zoneId })(function(err, zone) {
+      if(err) return next(err);
+      return res.render('zone', {title: 'Jurassic Park', zone: zone});
+    });
+  });
+
   return router;
 };

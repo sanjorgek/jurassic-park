@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      table, th, td {
+          border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><a href="/"><%= title %></a></h1>
+    <p>Detalle de zona: </p>
+    <p>
+      <ul>
+        <li>Code: <%= zone.code %></li>
+        <li>Nombre: <%= zone.dinosaur_name %></li>
+        <li>Jefe de seguridad: <%= zone.security %></li>
+        <li>Antropologo: <%= zone.antropologist %></li>
+        <li>Nutriologo: <%= zone.veterinary %></li>
+        <li>Jefe de intendencia: <%= zone.quatermaster %></li>
+        <li>Superficie (m^2): <%= zone.surface %></li>
+        <li>Alimentación: <%= zone.feed_type %></li>
+        <li>Peso: <%= zone.weight %></li>
+        <li>Altura: <%= zone.height %></li>
+        <li>Distribución: <%= zone.time_distribution %></li>
+        <li>Vegetación: <%= zone.detail %></li>
+        <li>Vegetación: <%= zone.tax_class %></li>
+        <li>Vegetación: <%= zone.tax_phylum %></li>
+        <li>Vegetación: <%= zone.tax_kingdom %></li>
+      </ul>
+    </p>
+  </body>
+</html>

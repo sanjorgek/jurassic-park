@@ -499,19 +499,31 @@ INSERT INTO `jurassicParkDB`.`distribution` (`name`)
 		('Jurasico'),
         ('Cretácico'),
         ('Triásico');
+        
+INSERT INTO `jurassicParkDB`.`vegetation_type` (`detail`)
+VALUES 
+	("Bosque de pino"),
+    ("Desierto"),
+    ("Selva"),
+    ("Pastizal");
 
-INSERT INTO `jurassicParkDB`.`dinosaur` (`zone_code`,`tax_class_id`,`name`,`distribution_id`,`surface`,`feed_type`,`weight`,`height`)
+INSERT INTO `jurassicParkDB`.`dinosaur` (`zone_code`,`tax_class_id`,`name`,`distribution_id`,`surface`,`feed_type`,`weight`,`height`,`vegetation_type_id`)
 	VALUES
-		('DC6CB5CD-9C42-9610-06E2-5353514D313D',2,'Baryonyx',2,158000,'carnivoro','1.7 tons','2.75 m'),
-        ('A5B68985-5108-AEBA-8F45-2EB5B0037B50',1,'Herrerasaurus',3,8625800,'carnivoro','210 kg','50 cm'),
-        ('AB1D4658-092E-6A0D-13C8-09692BF00ED0',1,'Dilophosaurus',1,186800,'carnivoro','350 kg','160 cm'),
-        ('647C8EFC-0B82-F9D4-4F1B-D7B8AE80E80F',1,'Velociraptor',2,183500,'carnivoro','15 kg','50 cm'),
-        ('B57363D3-3504-686D-3973-BE9CDCEEE8F4',1,'Tyrannosaurus rex',2,17862000,'carnivoro','5.6 tons','11 m'),
-        ('7D53F717-331D-CF86-1272-2644F778A92E',1,'Segisaurus',1,7895800,'carnivoro','5 kg','30 cm'),
-        ('BA5AEB5F-7A7C-BBA3-04C6-03775C16C58A',1,'Metriacanthosaurus',1,72600,'carnivoro','1 tons','2.3 m'),
-        ('74203EDC-586A-ABD5-4043-70F3723372CC',1,'Proceratosaurus',1,183200,'carnivoro','40 cm','8 ft'),
-        ('E3886627-FC23-84DD-4D21-7A2B84FC5D3D',1,'Parasaurolophus',2,1869000,'herbívoro','2.5 tons','8 m'),
-        ('896F11CF-49C1-07F9-4105-C0DF60BEC1E1',1,'Triceratops',2,86100,'herbívoro','8 tons','4 m'),
-        ('B8D51212-67D8-F427-E135-27998E1FAA63',1,'Gallimimus',2,769000,'herbívoro','440 kg','3 m'),
-        ('4F55983A-A2D2-954E-1561-E96BBF97FA31',1,'Brachiosaurus',1,254000,'herbívoro','28.7 metric tons','26 m');
+		('DC6CB5CD-9C42-9610-06E2-5353514D313D',2,'Baryonyx',2,158000,'carnivoro','1.7 tons','2.75 m',1),
+        ('A5B68985-5108-AEBA-8F45-2EB5B0037B50',1,'Herrerasaurus',3,8625800,'carnivoro','210 kg','50 cm',2),
+        ('AB1D4658-092E-6A0D-13C8-09692BF00ED0',1,'Dilophosaurus',1,186800,'carnivoro','350 kg','160 cm',3),
+        ('647C8EFC-0B82-F9D4-4F1B-D7B8AE80E80F',1,'Velociraptor',2,183500,'carnivoro','15 kg','50 cm',4),
+        ('B57363D3-3504-686D-3973-BE9CDCEEE8F4',1,'Tyrannosaurus rex',2,17862000,'carnivoro','5.6 tons','11 m',4),
+        ('7D53F717-331D-CF86-1272-2644F778A92E',1,'Segisaurus',1,7895800,'carnivoro','5 kg','30 cm',1),
+        ('BA5AEB5F-7A7C-BBA3-04C6-03775C16C58A',1,'Metriacanthosaurus',1,72600,'carnivoro','1 tons','2.3 m',2),
+        ('74203EDC-586A-ABD5-4043-70F3723372CC',1,'Proceratosaurus',1,183200,'carnivoro','40 cm','8 ft',3),
+        ('E3886627-FC23-84DD-4D21-7A2B84FC5D3D',1,'Parasaurolophus',2,1869000,'herbívoro','2.5 tons','8 m',4),
+        ('896F11CF-49C1-07F9-4105-C0DF60BEC1E1',1,'Triceratops',2,86100,'herbívoro','8 tons','4 m',1),
+        ('B8D51212-67D8-F427-E135-27998E1FAA63',1,'Gallimimus',2,769000,'herbívoro','440 kg','3 m',3),
+        ('4F55983A-A2D2-954E-1561-E96BBF97FA31',1,'Brachiosaurus',1,254000,'herbívoro','28.7 metric tons','26 m',2);
+
+    
+    
+
+
 

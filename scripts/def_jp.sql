@@ -307,15 +307,11 @@ create table `jurassicParkDB`.`dinosaur`(
   feed_type					enum('herbívoro','carnivoro'),
   weight					varchar(255) not null,
   height					varchar(255) not null,
+  vegetation_type_id		bigint not null,
   created_at                datetime DEFAULT CURRENT_TIMESTAMP,
   updated_at                datetime ON UPDATE CURRENT_TIMESTAMP,
   deleted_at                datetime,
   constraint pk_tax_phylum primary key (id)
-) ENGINE=INNODB;
-
-create table `jurassicParkDB`.`prefer`(
-  vegetation_type_id		bigint not null,
-  dinosaur_id				bigint not null
 ) ENGINE=INNODB;
 
 create table `jurassicParkDB`.`dinosaur_safety_requirement`(
@@ -476,11 +472,8 @@ alter table `jurassicParkDB`.`dinosaur` add
 alter table `jurassicParkDB`.`dinosaur` add
   constraint fk_dinosaur_3 foreign key (distribution_id) references `jurassicParkDB`.`distribution` (id)
   on delete restrict on update restrict;
-alter table `jurassicParkDB`.`prefer` add 
-  constraint fk_prefer_1 foreign key (dinosaur_id) references `jurassicParkDB`.`dinosaur` (id)
-  on delete restrict on update restrict;
-alter table `jurassicParkDB`.`prefer` add 
-  constraint fk_prefer_2 foreign key (vegetation_type_id) references `jurassicParkDB`.`vegetation_type` (id)
+alter table `jurassicParkDB`.`dinosaur` add 
+  constraint fk_dinosaur_4 foreign key (vegetation_type_id) references `jurassicParkDB`.`vegetation_type` (id)
   on delete restrict on update restrict;  
 alter table `jurassicParkDB`.`dinosaur_safety_requirement` add
   constraint fk_dinosaur_safety_requirement_1 foreign key (dinosaur_id) references `jurassicParkDB`.`dinosaur` (id)
