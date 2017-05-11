@@ -12,6 +12,7 @@ const schools = require('./routes/school')(models);
 const reservations = require('./routes/reservation')(models);
 const reserveZones = require('./routes/reserveZone')(models);
 const zones = require('./routes/zone')(models);
+const employees = require('./routes/employee')(models);
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use('/schools', schools);
 app.use('/reservations', reservations);
 app.use('/reserve_zones', reserveZones);
 app.use('/zones', zones);
+app.use('/employee', employees);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

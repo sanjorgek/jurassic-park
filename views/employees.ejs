@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      table, th, td {
+          border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><a href="/"><%= title %></a></h1>
+    <p>Zonas reservadas : </p>
+    <p>
+      <table style="width:100%">
+        <tr>
+          <th>#</th>
+          <th>RFC</th>
+          <th>Nombre</th>
+          <th>Direccion</th>
+          <th>Telefonos</th>
+          <th>Mails</th>
+          <th>Es intendencia</th>
+          <th>Es conductor</th>
+          <th>Es seguridad</th>
+          <th>Es veterinario</th>
+          <th>Es cientifico</th>
+        </tr>
+          <% for(var i=0; i<employees.length; i++){ %>
+            <tr>
+              <td><%= i %></td>
+              <td><%= employees[i].rfc %></td>
+              <td><%= employees[i].names %> <%= employees[i].father_last_name %> <%= employees[i].father_last_name %></td>
+              <td><%= employees[i].street %>, <%= employees[i].district %>, CP <%= employees[i].pc %> <%= employees[i].city %>, <%= employees[i].state %>, <%= employees[i].country %></td>
+              <td><%= employees[i].telephone %></td>
+              <td><%= employees[i].email %></td>
+              <% if(employees[i].isQuatermaster===1){ %><td>Sí</td><% }else{ %><td>No</td><% } %>
+              <% if(employees[i].isDriver===1){ %><td>Sí</td><% }else{ %><td>No</td><% } %>
+              <% if(employees[i].isSecurity===1){ %><td>Sí</td><% }else{ %><td>No</td><% } %>
+              <% if(employees[i].isScientist===1){ %><td>Sí</td><% }else{ %><td>No</td><% } %>
+              <% if(employees[i].isVeterinary===1){ %><td>Sí</td><% }else{ %><td>No</td><% } %>
+            </tr>
+          <% } %>
+      </table>
+    </p>
+  </body>
+</html>
