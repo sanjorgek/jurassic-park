@@ -75,7 +75,7 @@ const findZonesOneByID = (query) => (cb) => {
           "inner join product_visit as PV on VT.code=PV.visit_type_code and VT.id=PV.visit_type_id and PV.is_active\n"+
           "inner join reserve_zone as RZ on RZ.visit_type_code=VT.code and RZ.visit_type_id=VT.id\n"+
           "left join student as St on St.reserve_zone_id=RZ.id\n"+
-          "inner join (select Vs.reserve_zone_id, group_concat(Dn.name) as 'dino_names'\n"+
+          "left join (select Vs.reserve_zone_id, group_concat(Dn.name) as 'dino_names'\n"+
           "  from visit as Vs\n"+
           "  inner join zone as Zn on Zn.code=Vs.zone_code\n"+
           "  inner join dinosaur as Dn on Dn.zone_code=Zn.code\n"+
@@ -84,6 +84,7 @@ const findZonesOneByID = (query) => (cb) => {
           "where RZ.reservation_id="+query.reservation_id+"\n"+
           "group by St.name\n"+
           "order by VT.id;";
+        console.log(querySQL);
         next(null, querySQL);
       },
       connection
