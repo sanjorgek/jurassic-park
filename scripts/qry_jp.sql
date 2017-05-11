@@ -10,6 +10,11 @@ select R.id as 'reservation_id', R.visit_date, R.visit_hour, Sc.code as 'school_
     group by R.id
     order by R.visit_date;
     
+select RZ.grade
+	from `jurassicParkDB`.`reservation` as R
+    inner join `jurassicParkDB`.`reserve_zone` as RZ on RZ.reservation_id=R.id
+    group by RZ.grade;
+    
 select R.id as 'reservation_id', R.visit_date, R.visit_hour, Sc.code as 'school_code', Sc.name as 'school_name', group_concat(RZ.id), group_concat(RZ.grade), R.created_at, R.updated_at
   from `jurassicParkDB`.`reservation` as R
   inner join `jurassicParkDB`.`school` as Sc on Sc.id=R.school_id and Sc.code=R.school_code
@@ -17,10 +22,22 @@ select R.id as 'reservation_id', R.visit_date, R.visit_hour, Sc.code as 'school_
   where R.visit_date>='2017-05-10'
   group by R.id
   order by R.visit_date;
+  
+select RZ.reservation_id, VT.name as 'visit_name', RZ.id as 'reservation_zone_id', RZ.grade as 'reservation_zone_grade', group_concat(D.name) as 'dino_zones', RZ.principal_teacher, VT.code as 'visit_code', VT.id as 'visit_id', St.id as 'student_id', St.name as 'student_name', group_concat(PV.cost) as 'ticket_cost'
+  from `jurassicParkDB`.`reserve_zone` as RZ
+  inner join visit as Vi on RZ.id=Vi.reserve_zone_id
+  inner join `jurassicParkDB`.`zone` as Z on Vi.zone_code=Z.code
+  inner join `jurassicParkDB`.`dinosaur` as D on D.zone_code=Z.code
+  inner join `jurassicParkDB`.`visit_type` as VT on VT.code=RZ.visit_type_code and VT.id=RZ.visit_type_id
+  left join `jurassicParkDB`.`student` as St on St.reserve_zone_id=RZ.id
+  inner join `jurassicParkDB`.`product_visit` as PV on PV.visit_type_code=VT.code and PV.visit_type_id=VT.id and PV.is_active
+  where RZ.reservation_id=7
+  group by St.id
+  order by VT.id;
 
 # Lista de alumnos con costo de boleto y las zonas a las que tienen acceso
 # ordenas por tipo de visita
-select VT.name as 'visit_name', RZ.id as 'reservation_zone_id', group_concat(D.name) as 'dino_zones', RZ.principal_teacher, VT.code as 'visit_code', VT.id as 'visit_id', St.id as 'student_id', St.name as 'student_name', PV.cost as 'ticket_cost'
+select RZ.reservation_id, VT.name as 'visit_name', RZ.id as 'reservation_zone_id', RZ.grade as 'reservation_zone_grade', group_concat(D.name) as 'dino_zones', RZ.principal_teacher, VT.code as 'visit_code', VT.id as 'visit_id', St.id as 'student_id', St.name as 'student_name', PV.cost as 'ticket_cost'
 	from `jurassicParkDB`.`reserve_zone` as RZ 
 	inner join `jurassicParkDB`.`visit` as Vi on RZ.id=Vi.reserve_zone_id
 	inner join `jurassicParkDB`.`zone` as Z on Vi.zone_code=Z.code

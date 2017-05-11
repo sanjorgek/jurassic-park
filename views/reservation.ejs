@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      table, th, td {
+          border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Zonas reservadas : </p>
+    <p>
+      <table style="width:100%">
+        <tr>
+          <th>#</th>
+          <th>id</th>
+          <th>Tipo de visita</th>
+          <th>Alumno</th>
+          <th>Grado</th>
+          <th>Zonas</th>
+          <th>Grupos</th>
+          <th>Editar</th>
+          <th>Cobrar</th>
+          <th>Borrar</th>
+        </tr>
+          <% for(var i=0; i<reservations.length; i++){ %>
+            <tr>
+              <td><%= i+1 %></td>
+              <td><%= reservations[i].reservation_id %></td>
+              <td><%= reservations[i].visit_name %></td>
+              <td><%= reservations[i].student_name %></td>
+              <td><%= reservations[i].reservation_zone_grade %></td>
+              <td><%= reservations[i].dino_zones %></td>
+              <td><%= reservations[i].reservation_zone_grade %></td>
+              <td><a href="/reservation/<%= reservations[i].reservation_id %>">Editar</a></td>
+              <td><a href="/reservation/<%= reservations[i].reservation_id %>/collect">Cobrar</a></td>
+              <td><a href="/reservation/<%= reservations[i].reservation_id %>/delete">Borrar</a></td>
+            </tr>
+          <% } %>
+      </table>
+    </p>
+    <p>Grupos:</p>
+    <p>
+      <table style="width:100%">
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Añadir Alumno</th>
+        </tr>
+          <% for(var i=0; i<grades.length; i++){ %>
+            <tr>
+              <td><%= i+1 %></td>
+              <td><%= grades[i].grade %></td>
+
+              <td><a href="/reservation/<%= reservations[i].reservation_id %>/new_student">Añadir</a></td>
+            </tr>
+          <% } %>
+      </table>
+    </p>
+  </body>
+</html>

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const waterfall  = require('async/waterfall');
 const uuid = require('uuid/v4');
-const debug = require('debug')('jurassic-park:api');
+const debug = require('debug')('jurassic-park:school');
 
 module.exports = (models) => {
   router.get('/', function(req, res, next) {

@@ -19,7 +19,6 @@ module.exports = (query, cb) => {
       debug(query);
       connection.query(query, function (err, rows, fields) {
         debug(rows);
-        debug(fields);
         if (err) {
           connection.release();
           return cb(err);

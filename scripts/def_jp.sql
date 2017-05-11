@@ -337,7 +337,7 @@ alter table `jurassicParkDB`.`address` add
 alter table `jurassicParkDB`.`school` add
   constraint uq_school_1 unique (code);
 alter table `jurassicParkDB`.`school` add
-  constraint uq_school_2 unique (name);
+  constraint uq_school_2 unique (name, address_id);
 alter table `jurassicParkDB`.`school_email` add
   constraint uq_school_email_1 unique (school_id,school_code,email);
 alter table `jurassicParkDB`.`school_telephone` add
