@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>
+      Datos de la visita
+    </p>
+    <form method="post">
+      Zonas de acceso
+      <select name="zone">
+        <% for(var i=0; i< zones.length; i++){ %>
+          <option value="<%= zones[i].code %>"><%= zones[i].name %></option>
+        <% } %>
+      </select>
+      <input type="submit" value="Añadir">
+    </form>
+  </body>
+</html>

@@ -17,5 +17,28 @@ module.exports = (models) => {
     });
   });
 
+  router.get('/:gradeId/new_visit', function(req, res, next) {
+    models.Zone.findList({ reserve_zone_id: req.params.gradeId, is_assigned: false })(function(err, zones) {
+      if(err) return next(err);
+      return res.render('new_visit', {title: 'Jurassic Park', reserve_zone_id: req.params.gradeId, zones: zones});
+    });
+  });
+
+  router.post('/:gradeId/new_visit', function(req, res, next) {
+    console.log(req.body);
+    models.Visit.createOne({reserve_zone_id: req.params.gradeId, zone_code: req.body.zone })(function(err, result) {
+      if(err) return next(err);
+      res.redirect("/reservations/"+req.params.gradeId);
+    });
+  });
+
+  router.delete('/:gradeId/visit', function(req, res, next) {
+    console.log(req.body);
+    models.Visit.deleteByZone({reserve_zone_id: req.params.gradeId, zone_code: req.body.zone })(function(err, result) {
+      if(err) return next(err);
+      res.redirect("/reservations/"+req.params.gradeId);
+    });
+  });
+
   return router;
 };

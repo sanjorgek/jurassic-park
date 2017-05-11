@@ -37,11 +37,12 @@
       </table>
     </p>
     <p>Grupos:</p>
-    <p>
       <% for(var i=0; i<grades.length; i++){ %>
-        <a href="/reserve_zones/<%= grades[i].id %>/new_student">Añadir alumno a <%= grades[i].grade %></a>
+        <p>
+          <a href="/reserve_zones/<%= grades[i].id %>/new_student">Añadir alumno a <%= grades[i].grade %></a>
+          <a href="/reserve_zones/<%= grades[i].id %>/new_visit">Añadir zona a <%= grades[i].grade %></a>
+        </p>
       <% } %>
-    </p>
     <p><a href="/reservations/<%= reservation_id %>/new_grade">Nuevo grado</a></p>
   </body>
 </html>
