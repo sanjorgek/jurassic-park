@@ -47,5 +47,12 @@ module.exports = (models) => {
     });
   });
 
+  router.get('/:gradeId/delete_grade', function(req, res, next) {
+    models.ReserveZone.deleteById({ reserve_zone_id: req.params.gradeId })(function(err, zones) {
+      if(err) return next(err);
+      res.redirect("/reservations/"+req.params.gradeId);
+    });
+  });
+
   return router;
 };

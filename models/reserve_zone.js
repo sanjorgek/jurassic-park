@@ -16,6 +16,21 @@ const createOne = (query) => (cb) => {
   );
 };
 
+const deleteById = (query) => (cb) => {
+  waterfall(
+    [
+      function(next) {
+        let querySQL = "DELETE FROM reserve_zone\n"+
+          " WHERE id="+query.reserve_zone_id+";";
+        next(null, querySQL);
+      },
+      connection
+    ],
+    cb
+  );
+}
+
 module.exports = {
-  createOne
+  createOne,
+  deleteById
 };
